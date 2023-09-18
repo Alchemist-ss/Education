@@ -1,24 +1,74 @@
 <template>
-  <div class="post" v-for="post in posts">
-    <div>
-      <strong>Название: </strong> {{ post.title }}
-    </div>
-    <div>
-      <strong>Описание: </strong> {{ post.body }}
-    </div>
+  <div class="case-for-post">
+    <form @submit.prevent class="form">
+      <h2>Создание постов:</h2>
+      <input 
+        v-model="post.title"
+        class="input"
+        type="text"
+        placeholder="Название"
+      >
+      <input 
+        v-model="post.body"
+        class="input"
+        type="text"
+        placeholder="Описание"
+      >
+      <button class="form__button" @click="createPost">Создать</button>
+    </form>
   </div>
 </template>
 
 <script>
   export default {
-    
+    data() {
+      return {
+        post: {
+          title: '',
+          body: '',
+        }
+      }
+    },
+    methods: {
+      createPost() {
+        const newPost = {
+          id: Date.now(),
+          title: this.title,
+          body: this.body,
+        }
+        this.posts.push(newPost);
+        this.title = '';
+        this.body = '';
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-.post {
-      padding: 15px;
+.case-for-post {
+    width: 500px;
+    
+    .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input {
+      width: 100%;
+      border: 1px solid teal;
+      padding: 10px 15px;
       margin-top: 15px;
-      border: 2px solid teal;
     }
+
+    &__button {
+      background: rgb(95, 164, 253);
+      border: 1px solid rgb(175, 205, 250);
+      border-radius: 5px;
+      width: 30%;
+      margin-top: 15px;
+      padding: 10px;
+      color: white;
+    }
+    }
+  }
 </style>
