@@ -2,53 +2,51 @@
   <div class="case-for-post">
     <form @submit.prevent class="form">
       <h2>Создание постов:</h2>
-      <input 
+      <input
         v-model="post.title"
         class="input"
         type="text"
         placeholder="Название"
-      >
-      <input 
+      />
+      <input
         v-model="post.body"
         class="input"
         type="text"
         placeholder="Описание"
-      >
+      />
       <button class="form__button" @click="createPost">Создать</button>
     </form>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        post: {
-          title: '',
-          body: '',
-        }
-      }
+export default {
+  data() {
+    return {
+      post: {
+        title: "",
+        body: "",
+      },
+    };
+  },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit("create", this.post);
+      this.post = {
+        title: "",
+        body: "",
+      };
     },
-    methods: {
-      createPost() {
-        const newPost = {
-          id: Date.now(),
-          title: this.title,
-          body: this.body,
-        }
-        this.posts.push(newPost);
-        this.title = '';
-        this.body = '';
-    }
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .case-for-post {
-    width: 500px;
-    
-    .form {
+  width: 500px;
+
+  .form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,6 +67,6 @@
       padding: 10px;
       color: white;
     }
-    }
   }
+}
 </style>

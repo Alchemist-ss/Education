@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <post-form />
+    <post-form @create="createPost" />
     <post-list :posts="posts" />
     <reaction />
   </div>
@@ -25,6 +25,11 @@ export default {
         { id: 3, title: "Супер важное", body: "Мир это вселенная?" },
       ],
     };
+  },
+  methods: {
+    createPost(post) {
+      console.log(post);
+    },
   },
 };
 </script>
