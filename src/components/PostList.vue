@@ -1,12 +1,16 @@
 <template>
-  <div class="post" v-for="post in posts">
-    <div><strong>Название: </strong> {{ post.title }}</div>
-    <div><strong>Описание: </strong> {{ post.body }}</div>
+  <div class="case-post">
+    <h3>Список пользователей:</h3>
+    <post-item v-for="post in posts" :post="post" />
   </div>
 </template>
 
 <script>
+import PostItem from "./PostItem.vue";
 export default {
+  components: {
+    PostItem,
+  },
   props: {
     posts: {
       type: Array,
@@ -17,10 +21,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post {
+.case-post {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
-  padding: 15px;
   margin-top: 15px;
-  border: 2px solid teal;
 }
 </style>

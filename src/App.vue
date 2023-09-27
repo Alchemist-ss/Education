@@ -2,20 +2,18 @@
   <div class="body">
     <post-form @create="createPost" />
     <post-list :posts="posts" />
-    <reaction />
   </div>
 </template>
 
 <script>
 import PostForm from "./components/PostForm.vue";
 import PostList from "./components/PostList.vue";
-import Reaction from "./components/Reaction.vue";
-
+import PostItem from "./components/PostItem.vue/";
 export default {
   components: {
     PostForm,
     PostList,
-    Reaction,
+    PostItem,
   },
   data() {
     return {
@@ -28,7 +26,7 @@ export default {
   },
   methods: {
     createPost(post) {
-      console.log(post);
+      this.posts.push(post);
     },
   },
 };
