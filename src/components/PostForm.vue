@@ -2,18 +2,8 @@
   <div class="case-for-post">
     <form @submit.prevent class="form">
       <h2>Создание постов:</h2>
-      <input
-        v-model="post.title"
-        class="input"
-        type="text"
-        placeholder="Название"
-      />
-      <input
-        v-model="post.body"
-        class="input"
-        type="text"
-        placeholder="Описание"
-      />
+      <my-input v-model="post.title" type="text" placeholder="Название" />
+      <my-input v-model="post.body" type="text" placeholder="Описание" />
       <button class="form__button" @click="createPost">Создать</button>
     </form>
   </div>
@@ -52,13 +42,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    .input {
-      width: 100%;
-      border: 1px solid teal;
-      padding: 10px 15px;
-      margin-top: 15px;
-    }
 
     &__button {
       background: rgb(95, 164, 253);

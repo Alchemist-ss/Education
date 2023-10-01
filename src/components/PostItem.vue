@@ -1,13 +1,22 @@
 <template>
   <div class="post">
-    <div><strong>Название: </strong> {{ post.title }}</div>
-    <div><strong>Описание: </strong> {{ post.body }}</div>
-    <reaction />
+    <div class="post__case">
+      <div class="post__item">
+        <div><strong>Название: </strong> {{ post.title }}</div>
+        <div><strong>Описание: </strong> {{ post.body }}</div>
+      </div>
+      <div>
+        <my-button>Удалить</my-button>
+      </div>
+    </div>
+    <div class="post__reaction">
+      <reaction />
+    </div>
   </div>
 </template>
 
 <script>
-import Reaction from "/src/components/Reaction.vue";
+import Reaction from "./Reaction.vue";
 export default {
   components: {
     Reaction,
@@ -27,5 +36,14 @@ export default {
   padding: 15px;
   margin-top: 15px;
   border: 2px solid teal;
+  border-radius: 5px;
+
+  &__case {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__item {}
 }
 </style>

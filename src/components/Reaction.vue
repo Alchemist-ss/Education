@@ -6,7 +6,7 @@
           Кол-во лайков: <strong>{{ likes }}</strong>
         </div>
         <div class="reaction__button">
-          <button @click="addLike">Лайк</button>
+          <my-button @click="addLike" style="margin: 5px">Лайк</my-button>
         </div>
       </div>
       <div>
@@ -14,7 +14,7 @@
           Кол-во дизлайков: <strong>{{ dislikes }}</strong>
         </div>
         <div class="reaction__button">
-          <button @click="addDislike">Дизлайк</button>
+          <my-button style="margin: 5px" @click="addDislike">Дизлайк</my-button>
         </div>
       </div>
     </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -52,6 +53,7 @@ export default {
     flex-direction: column;
     width: 50%;
   }
+
   &__info {
     display: flex;
     justify-content: space-evenly;
@@ -61,10 +63,6 @@ export default {
   &__button {
     display: flex;
     justify-content: space-evenly;
-  }
-  &__button button {
-    margin-top: 5px;
-    padding: 5px;
   }
 }
 </style>

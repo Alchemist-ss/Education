@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import PostItem from "./PostItem.vue";
+import PostItem from "./Postitem.vue";
 export default {
   components: {
     PostItem,
