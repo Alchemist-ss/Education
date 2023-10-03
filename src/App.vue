@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <post-form @create="createPost" />
-    <post-list :posts="posts" />
+    <post-list @remove="removePost" :posts="posts" />
   </div>
 </template>
 
@@ -17,10 +17,21 @@ export default {
   },
   data() {
     return {
-      posts: [
-        { id: 1, title: "Что-то насущьное", body: "Есть мы или нас нет?" },
-        { id: 2, title: "Неочень важное", body: "Что было нашим зарождением" },
-        { id: 3, title: "Супер важное", body: "Мир это вселенная?" },
+      posts: [{
+        id: 1,
+        title: "Что-то насущьное",
+        body: "Есть мы или нас нет?"
+      },
+      {
+        id: 2,
+        title: "Неочень важное",
+        body: "Что было нашим зарождением"
+      },
+      {
+        id: 3,
+        title: "Супер важное",
+        body: "Мир это вселенная?"
+      },
       ],
     };
   },
@@ -28,6 +39,9 @@ export default {
     createPost(post) {
       this.posts.push(post);
     },
+    removePost(post) {
+      this.posts = this.posts.filter(p => p.id !== post.id)
+    }
   },
 };
 </script>
