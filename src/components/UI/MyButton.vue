@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button class="button-V1">
     <slot></slot>
   </button>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button {
+.button-V1 {
   padding: 5px;
   background: rgb(243, 243, 243);
   border: 1px solid teal;

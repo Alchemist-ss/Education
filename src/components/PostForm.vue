@@ -4,7 +4,7 @@
       <h2>Создание постов:</h2>
       <my-input v-model="post.title" type="text" placeholder="Название" />
       <my-input v-model="post.body" type="text" placeholder="Описание" />
-      <button class="form__button" @click="createPost">Создать</button>
+      <my-button-v2 @click="createPost">Создать</my-button-v2>
     </form>
   </div>
 </template>
@@ -42,16 +42,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    &__button {
-      background: rgb(95, 164, 253);
-      border: 1px solid rgb(175, 205, 250);
-      border-radius: 5px;
-      width: 30%;
-      margin-top: 15px;
-      padding: 10px;
-      color: white;
-    }
   }
 }
 </style>
