@@ -44,6 +44,7 @@ export default {
     justify-content: space-between;
   }
 
-  &__item {}
+  &__item {
+  }
 }
 </style>

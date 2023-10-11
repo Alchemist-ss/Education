@@ -1,13 +1,13 @@
 <template>
-  <button class='button-v2'>
+  <button class="button-v2">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'my-button-v2'
-}
+  name: "my-button-v2",
+};
 </script>
 
 <style lang="scss" scoped>
@@ -15,7 +15,7 @@ export default {
   background: rgb(95, 164, 253);
   border: 1px solid rgb(175, 205, 250);
   border-radius: 5px;
-  width: 30%;
+  width: 150px;
   margin-top: 15px;
   padding: 10px;
   color: white;
