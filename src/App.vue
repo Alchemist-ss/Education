@@ -9,13 +9,13 @@
         </my-button-v2>
       </div>
       <div class="app-btns__right">
-        <my-select v-model="selectedSort"></my-select>
+        <my-select v-model="selectedSort" :options="sortOptions"></my-select>
       </div>
     </div>
     <my-modal-window v-model:show="modalVisible">
       <post-form @create="createPost" />
     </my-modal-window>
-    <post-list @remove="removePost" :posts="posts" v-if="!isPostLoading" />
+    <post-list @remove="removePost" :posts="sortedPost" v-if="!isPostLoading" />
     <div v-else>Идет загрузка ...</div>
   </div>
 </template>
@@ -39,6 +39,11 @@ export default {
       modalVisible: false,
       isPostLoading: false,
       selectedSort: "",
+      sortOptions: [
+        { value: "title", name: "По названию" },
+        { value: "body", name: "По описанию" },
+        { value: "post.id", name: "По ID" },
+      ],
     };
   },
   methods: {
@@ -69,6 +74,13 @@ export default {
   mounted() {
     this.fetchPosts();
   },
+  computed: {
+    sortedPost() {
+      return [...this.posts].sort((post1, post2) =>
+        post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+      );
+    },
+  },
 };
 </script>
 
@@ -97,6 +109,7 @@ export default {
   justify-content: space-between;
   align-items: start;
   width: 40%;
+  min-width: 350px;
 
   &__two-left {
     display: flex;
