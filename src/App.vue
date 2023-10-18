@@ -9,13 +9,18 @@
         </my-button-v2>
       </div>
       <div class="app-btns__right">
-        <my-select v-model="selectedSort" :options="sortOptions"></my-select>
+        <my-select v-model="selectedSort" :options="sortOptions" />
+        <my-input v-model="searchQuery" placeholder="Поиск..." />
       </div>
     </div>
     <my-modal-window v-model:show="modalVisible">
       <post-form @create="createPost" />
     </my-modal-window>
-    <post-list @remove="removePost" :posts="sortedPost" v-if="!isPostLoading" />
+    <post-list
+      @remove="removePost"
+      :posts="sortedAndSearchedPosts"
+      v-if="!isPostLoading"
+    />
     <div v-else>Идет загрузка ...</div>
   </div>
 </template>
@@ -39,6 +44,7 @@ export default {
       modalVisible: false,
       isPostLoading: false,
       selectedSort: "",
+      searchQuery: "",
       sortOptions: [
         { value: "title", name: "По названию" },
         { value: "body", name: "По описанию" },
@@ -80,6 +86,11 @@ export default {
         post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
       );
     },
+    sortedAndSearchedPosts() {
+      return this.sortedPost.filter((post) =>
+        post.title.includes(this.searchQuery)
+      );
+    },
   },
 };
 </script>
@@ -117,7 +128,7 @@ export default {
   }
   &__right {
     display: flex;
-    margin-top: 25px;
+    flex-direction: column;
   }
 }
 </style>
