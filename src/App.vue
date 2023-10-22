@@ -9,8 +9,12 @@
         </my-button-v2>
       </div>
       <div class="app-btns__right">
-        <my-select v-model="selectedSort" :options="sortOptions" />
-        <my-input v-model="searchQuery" placeholder="Поиск..." />
+        <my-select
+          class="input"
+          v-model="selectedSort"
+          :options="sortOptions"
+        />
+        <my-input class="search" v-model="searchQuery" placeholder="Поиск..." />
       </div>
     </div>
     <my-modal-window v-model:show="modalVisible">
@@ -22,6 +26,19 @@
       v-if="!isPostLoading"
     />
     <div v-else>Идет загрузка ...</div>
+    <div class="page__wrapper">
+      <div
+        class="page"
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+        :class="{
+          'current-page': page === pageNumber,
+        }"
+        @click="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,6 +62,9 @@ export default {
       isPostLoading: false,
       selectedSort: "",
       searchQuery: "",
+      page: 1,
+      limit: 10,
+      totalPages: 0,
       sortOptions: [
         { value: "title", name: "По названию" },
         { value: "body", name: "По описанию" },
@@ -63,11 +83,24 @@ export default {
     showModal() {
       this.modalVisible = true;
     },
+    changePage(pageNumber) {
+      this.page = pageNumber;
+      this.fetchPosts();
+    },
     async fetchPosts() {
       try {
         this.isPostLoading = true;
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
       } catch (e) {
@@ -88,7 +121,7 @@ export default {
     },
     sortedAndSearchedPosts() {
       return this.sortedPost.filter((post) =>
-        post.title.includes(this.searchQuery)
+        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
   },
@@ -125,10 +158,33 @@ export default {
   &__two-left {
     display: flex;
     flex-direction: column;
+    margin-right: 8px;
   }
+
   &__right {
     display: flex;
     flex-direction: column;
+    margin-left: 8px;
   }
+  .input {
+    margin-top: 15px;
+  }
+  .search {
+    margin-top: 15px;
+  }
+}
+
+.page__wrapper {
+  display: flex;
+  margin-top: 15px;
+}
+
+.page {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.current-page {
+  border: 2px solid teal;
 }
 </style>

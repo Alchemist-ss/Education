@@ -2,6 +2,7 @@
   <div class="post">
     <div class="post__case">
       <div class="post__item">
+        <div>{{ post.id }}</div>
         <div><strong>Название: </strong> {{ post.title }}</div>
         <div><strong>Описание: </strong> {{ post.body }}</div>
       </div>
@@ -45,6 +46,7 @@ export default {
   }
 
   &__item {
+    padding-right: 15px;
   }
 }
 </style>
