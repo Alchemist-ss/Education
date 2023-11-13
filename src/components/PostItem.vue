@@ -6,7 +6,10 @@
         <div><strong>Название: </strong> {{ post.title }}</div>
         <div><strong>Описание: </strong> {{ post.body }}</div>
       </div>
-      <div>
+      <div class="post__btns">
+        <my-button @click="$router.push(`/posts/${post.id}`)"
+          >Открыть</my-button
+        >
         <my-button @click="$emit('remove', post)">Удалить</my-button>
       </div>
     </div>
@@ -17,7 +20,7 @@
 </template>
 
 <script>
-import Reaction from "./Reaction.vue";
+import Reaction from "@/components/Reaction.vue";
 export default {
   components: {
     Reaction,
@@ -48,5 +51,8 @@ export default {
   &__item {
     padding-right: 15px;
   }
+}
+.post__btns {
+  display: flex;
 }
 </style>
