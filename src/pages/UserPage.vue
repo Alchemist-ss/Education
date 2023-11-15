@@ -14,7 +14,12 @@
           v-model="selectedSort"
           :options="sortOptions"
         />
-        <my-input class="search" v-model="searchQuery" placeholder="Поиск..." />
+        <my-input
+          v-focus
+          class="search"
+          v-model="searchQuery"
+          placeholder="Поиск..."
+        />
       </div>
     </div>
     <my-modal-window v-model:show="modalVisible">
@@ -26,7 +31,7 @@
       v-if="!isPostLoading"
     />
     <div v-else>Идет загрузка ...</div>
-    <div ref="observer" class="observer"></div>
+    <div v-intersection="loadMorePosts" class="observer"></div>
     <!-- <div class="page__wrapper">
       <div
         class="page"
@@ -134,19 +139,6 @@ export default {
   mounted() {
     this.fetchPosts();
     console.log(this.$refs.observer);
-    const options = {
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-
-    const callback = (entries, observer) => {
-      if (entries[0].isIntersecting && this.page < this.totalPages) {
-        this.loadMorePosts();
-      }
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPost() {
